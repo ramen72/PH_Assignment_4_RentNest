@@ -23,3 +23,5 @@ node_modules
 
 .vercel
 # .env*
+
+/src/generated/prisma
