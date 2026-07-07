@@ -1,8 +1,24 @@
+import cookieParser from "cookie-parser";
 import express, { Application, NextFunction, Request, Response } from "express";
+import { authRoute } from "./modules/auth/auth.route";
+import { notFoundHandler } from "./middlewares/notFoundHandler";
+import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 const app: Application = express();
 
-app.get("/", (req: Request, res: Response) => {
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.get("/api", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
+
+app.use("/api/auth", authRoute);
+
+// Not Found Handler
+app.use(notFoundHandler);
+
+// Global Error Handler
+app.use(globalErrorHandler);
 
 export default app;
