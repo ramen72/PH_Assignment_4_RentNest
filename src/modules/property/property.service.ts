@@ -29,13 +29,19 @@ const createPropertyIntoDB = async (
 };
 
 const getAllPropertiesFromDB = async () => {
-  return prisma.property.findMany({
+  const result = await prisma.property.findMany({
     include: {
-      landlord: true,
+      landlord: {
+        omit: {
+          password: true,
+        },
+      },
       category: true,
       amenities: true,
     },
+    orderBy: [{ createdAt: "desc" }, { title: "asc" }],
   });
+  return result;
 };
 
 const getSinglePropertyFromBD = async (id: string) => {
