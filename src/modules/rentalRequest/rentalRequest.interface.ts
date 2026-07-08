@@ -1,16 +1,17 @@
-import { Role, UserStatus } from "../../../generated/prisma/enums";
+import { RentalRequestStatus } from "../../../generated/prisma/enums";
 
-export interface IRegisterUserPayload {
-  name: string;
-  email: string;
-  password: string;
-  phone?: string;
-  profilePhoto?: string;
-  role: Role;
-  status: UserStatus;
+export interface ICreateRentalRequestPayload {
+  propertyId: string;
+  moveInDate: Date;
+  rentalDuration: number;
+  monthlyRent: number;
+  message?: string;
 }
 
-export interface ILoginPayload {
-  email: string;
-  password: string;
+export interface IUpdateRentalRequestPayload {
+  moveInDate?: Date;
+  rentalDuration?: number;
+  monthlyRent?: number;
+  message?: string;
+  status?: RentalRequestStatus;
 }
