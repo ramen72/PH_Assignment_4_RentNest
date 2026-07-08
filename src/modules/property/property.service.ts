@@ -28,16 +28,17 @@ const createPropertyIntoDB = async (
   return result;
 };
 
-const getAllProperties = async () => {
+const getAllPropertiesFromDB = async () => {
   return prisma.property.findMany({
     include: {
       landlord: true,
       category: true,
+      amenities: true,
     },
   });
 };
 
-const getSingleProperty = async (id: string) => {
+const getSinglePropertyFromBD = async (id: string) => {
   return prisma.property.findUniqueOrThrow({
     where: { id },
     include: {
@@ -47,7 +48,10 @@ const getSingleProperty = async (id: string) => {
   });
 };
 
-const updateProperty = async (id: string, payload: IUpdatePropertyPayload) => {
+const updatePropertyIntoDB = async (
+  id: string,
+  payload: IUpdatePropertyPayload,
+) => {
   const { categoryId, ...propertyData } = payload;
 
   // const data = {
@@ -67,7 +71,7 @@ const updateProperty = async (id: string, payload: IUpdatePropertyPayload) => {
   // });
 };
 
-const deleteProperty = async (id: string) => {
+const deletePropertyFromDB = async (id: string) => {
   return prisma.property.delete({
     where: {
       id,
@@ -75,10 +79,10 @@ const deleteProperty = async (id: string) => {
   });
 };
 
-export const PropertyService = {
+export const propertyService = {
   createPropertyIntoDB,
-  getAllProperties,
-  getSingleProperty,
-  updateProperty,
-  deleteProperty,
+  getAllPropertiesFromDB,
+  getSinglePropertyFromBD,
+  updatePropertyIntoDB,
+  deletePropertyFromDB,
 };

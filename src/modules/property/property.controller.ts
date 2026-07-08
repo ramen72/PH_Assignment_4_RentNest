@@ -2,12 +2,12 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
-import { PropertyService } from "./property.service";
+import { propertyService } from "./property.service";
 
 const createProperty = catchAsync(async (req: Request, res: Response) => {
   const landlordId = req.user?.id;
 
-  const result = await PropertyService.createPropertyIntoDB(
+  const result = await propertyService.createPropertyIntoDB(
     req.body,
     landlordId!,
   );
@@ -21,7 +21,7 @@ const createProperty = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllProperties = catchAsync(async (req, res) => {
-  const result = await PropertyService.getAllProperties();
+  const result = await propertyService.getAllPropertiesFromDB();
 
   sendResponse(res, {
     success: true,
@@ -32,7 +32,7 @@ const getAllProperties = catchAsync(async (req, res) => {
 });
 
 const getSingleProperty = catchAsync(async (req, res) => {
-  const result = await PropertyService.getSingleProperty(
+  const result = await propertyService.getSinglePropertyFromBD(
     req.params.id as string,
   );
 
@@ -45,7 +45,7 @@ const getSingleProperty = catchAsync(async (req, res) => {
 });
 
 const updateProperty = catchAsync(async (req, res) => {
-  const result = await PropertyService.updateProperty(
+  const result = await propertyService.updatePropertyIntoDB(
     req.params.id as string,
     req.body,
   );
@@ -59,7 +59,9 @@ const updateProperty = catchAsync(async (req, res) => {
 });
 
 const deleteProperty = catchAsync(async (req, res) => {
-  const result = await PropertyService.deleteProperty(req.params.id as string);
+  const result = await propertyService.deletePropertyFromDB(
+    req.params.id as string,
+  );
 
   sendResponse(res, {
     success: true,
