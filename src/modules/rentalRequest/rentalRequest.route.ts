@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { authController } from "./auth.controller";
+import { rentalController } from "./rentalRequest.controller";
 
 const router = Router();
 
-router.post("/register", authController.registerUser);
-router.post("/login", authController.loginUser);
+router.post("/", rentalController.createRental);
+router.get("/", rentalController.getAllRentals);
+router.patch("/:id", rentalController.updateRentals);
+router.delete("/:id", rentalController.deleteRentals);
 
-export const authRoute = router;
+export const rentalRoute = router;

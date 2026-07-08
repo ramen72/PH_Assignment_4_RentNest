@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { authController } from "./auth.controller";
+import { categoryController } from "./category.controller";
 
 const router = Router();
 
-router.post("/register", authController.registerUser);
-router.post("/login", authController.loginUser);
+router.post("/", categoryController.createCategory);
+router.get("/", categoryController.getAllCategories);
+router.patch("/:id", categoryController.updateCategories);
+router.delete("/:id", categoryController.deleteCategories);
 
-export const authRoute = router;
+export const categoryRoute = router;

@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { authController } from "./property.controller";
+import { propertyController } from "./property.controller";
 
 const router = Router();
 
-router.post("/register", authController.registerUser);
-router.post("/login", authController.loginUser);
+router.post("/", propertyController.createProperty);
+router.get("/", propertyController.getAllProperties);
+router.patch("/:id", propertyController.updateProperties);
+router.delete("/:id", propertyController.deleteProperties);
 
-export const authRoute = router;
+export const propertyRoute = router;

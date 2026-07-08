@@ -14,4 +14,5 @@ export const amenityService = {
   createAmenityIntoDB,
   getAllAmenitiesFromDB,
   updateAmenitiesIntoDB,
+  deleteAmenitiesFromDB,
 };

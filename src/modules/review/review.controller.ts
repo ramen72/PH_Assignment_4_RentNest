@@ -2,58 +2,78 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
-import { authService } from "./auth.service";
-import { IRegisterUserPayload } from "./auth.interface";
 
-const registerUser = catchAsync(
+const createReview = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const payload = req.body;
-    const user = await authService.registerUserIntoDB(
-      payload as IRegisterUserPayload,
-    );
-
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus.CREATED,
-      message: "User registered Successfully.",
-      data: {
-        user,
-      },
-    });
+    // const payload = req.body;
+    // const user = await authService.registerUserIntoDB(
+    //   payload as IRegisterUserPayload,
+    // );
+    // sendResponse(res, {
+    //   success: true,
+    //   statusCode: httpStatus.CREATED,
+    //   message: "User registered Successfully.",
+    //   data: {
+    //     user,
+    //   },
+    // });
   },
 );
 
-// Login User
-const loginUser = catchAsync(
+const getAllReviews = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const payload = req.body;
-    const { accessToken, refreshToken } =
-      await authService.loginUserIntoDB(payload);
-
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "none",
-      maxAge: 1 * 24 * 60 * 60 * 1000,
-    });
-
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus.CREATED,
-      message: "User logged in Successfully.",
-      data: { accessToken, refreshToken },
-    });
+    // const payload = req.body;
+    // const user = await authService.registerUserIntoDB(
+    //   payload as IRegisterUserPayload,
+    // );
+    // sendResponse(res, {
+    //   success: true,
+    //   statusCode: httpStatus.CREATED,
+    //   message: "User registered Successfully.",
+    //   data: {
+    //     user,
+    //   },
+    // });
   },
 );
 
-export const authController = {
-  registerUser,
-  loginUser,
+const updateReviews = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // const payload = req.body;
+    // const user = await authService.registerUserIntoDB(
+    //   payload as IRegisterUserPayload,
+    // );
+    // sendResponse(res, {
+    //   success: true,
+    //   statusCode: httpStatus.CREATED,
+    //   message: "User registered Successfully.",
+    //   data: {
+    //     user,
+    //   },
+    // });
+  },
+);
+
+const deleteReviews = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // const payload = req.body;
+    // const user = await authService.registerUserIntoDB(
+    //   payload as IRegisterUserPayload,
+    // );
+    // sendResponse(res, {
+    //   success: true,
+    //   statusCode: httpStatus.CREATED,
+    //   message: "User registered Successfully.",
+    //   data: {
+    //     user,
+    //   },
+    // });
+  },
+);
+
+export const reviewController = {
+  createReview,
+  getAllReviews,
+  updateReviews,
+  deleteReviews,
 };
