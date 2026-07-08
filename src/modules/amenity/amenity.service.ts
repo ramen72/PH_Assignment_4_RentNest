@@ -1,18 +1,58 @@
-import bcrypt from "bcryptjs";
 import { prisma } from "../../lib/prisma";
-import config from "../../config";
-import httpStatus from "http-status";
-import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
-import { jwtUtils } from "../../utils/jwt";
+import {
+  ICreateAmenityPayload,
+  IUpdateAmenityPayload,
+} from "./amenity.interface";
 
-const createAmenityIntoDB = async () => {};
-const getAllAmenitiesFromDB = async () => {};
-const updateAmenitiesIntoDB = async () => {};
-const deleteAmenitiesFromDB = async () => {};
+const createAmenityIntoDB = async (payload: ICreateAmenityPayload) => {
+  const result = await prisma.amenity.create({
+    data: payload,
+  });
+
+  return result;
+};
+
+const getAllAmenitiesFromDB = async () => {
+  const result = await prisma.amenity.findMany({
+    orderBy: [{ name: "asc" }, { createdAt: "desc" }],
+  });
+
+  return result;
+};
+
+const getSingleAmenity = async (id: string) => {
+  return prisma.amenity.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+};
+
+const updateAmenitiesIntoDB = async (
+  id: string,
+  payload: IUpdateAmenityPayload,
+) => {
+  return prisma.amenity.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+};
+
+const deleteAmenitiesFromDB = async (id: string) => {
+  const result = await prisma.amenity.delete({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
 
 export const amenityService = {
   createAmenityIntoDB,
   getAllAmenitiesFromDB,
+  getSingleAmenity,
   updateAmenitiesIntoDB,
   deleteAmenitiesFromDB,
 };
