@@ -2,79 +2,77 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
-import { IRegisterUserPayload } from "./property.interface";
+import { PropertyService } from "./property.service";
 
-const createProperty = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    // const payload = req.body;
-    // const user = await authService.registerUserIntoDB(
-    //   payload as IRegisterUserPayload,
-    // );
-    // sendResponse(res, {
-    //   success: true,
-    //   statusCode: httpStatus.CREATED,
-    //   message: "User registered Successfully.",
-    //   data: {
-    //     user,
-    //   },
-    // });
-  },
-);
+const createProperty = catchAsync(async (req: Request, res: Response) => {
+  const landlordId = req.user?.id;
 
-const getAllProperties = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    // const payload = req.body;
-    // const user = await authService.registerUserIntoDB(
-    //   payload as IRegisterUserPayload,
-    // );
-    // sendResponse(res, {
-    //   success: true,
-    //   statusCode: httpStatus.CREATED,
-    //   message: "User registered Successfully.",
-    //   data: {
-    //     user,
-    //   },
-    // });
-  },
-);
+  const result = await PropertyService.createPropertyIntoDB(
+    req.body,
+    landlordId!,
+  );
 
-const updateProperties = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    // const payload = req.body;
-    // const user = await authService.registerUserIntoDB(
-    //   payload as IRegisterUserPayload,
-    // );
-    // sendResponse(res, {
-    //   success: true,
-    //   statusCode: httpStatus.CREATED,
-    //   message: "User registered Successfully.",
-    //   data: {
-    //     user,
-    //   },
-    // });
-  },
-);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.CREATED,
+    message: "Property created successfully",
+    data: result,
+  });
+});
 
-const deleteProperties = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    // const payload = req.body;
-    // const user = await authService.registerUserIntoDB(
-    //   payload as IRegisterUserPayload,
-    // );
-    // sendResponse(res, {
-    //   success: true,
-    //   statusCode: httpStatus.CREATED,
-    //   message: "User registered Successfully.",
-    //   data: {
-    //     user,
-    //   },
-    // });
-  },
-);
+const getAllProperties = catchAsync(async (req, res) => {
+  const result = await PropertyService.getAllProperties();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Properties retrieved successfully",
+    data: result,
+  });
+});
+
+const getSingleProperty = catchAsync(async (req, res) => {
+  const result = await PropertyService.getSingleProperty(
+    req.params.id as string,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Property retrieved successfully",
+    data: result,
+  });
+});
+
+const updateProperty = catchAsync(async (req, res) => {
+  const result = await PropertyService.updateProperty(
+    req.params.id as string,
+    req.body,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Property updated successfully",
+    data: result,
+  });
+});
+
+const deleteProperty = catchAsync(async (req, res) => {
+  const result = await PropertyService.deleteProperty(req.params.id as string);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Property deleted successfully",
+    data: result,
+  });
+});
 
 export const propertyController = {
   createProperty,
   getAllProperties,
-  updateProperties,
-  deleteProperties,
+  getSingleProperty,
+  updateProperty,
+  deleteProperty,
 };

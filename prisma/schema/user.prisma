@@ -14,16 +14,17 @@ model User {
   // Relations
 
   // Landlord → Properties
-//   properties   Property[]  @relation("LandlordProperties")
+  properties   Property[]  @relation("LandlordProperties")
+  
 
   // Tenant → Rental Requests
-//   rentalRequests RentalRequest[] @relation("TenantRentalRequests")
+  rentalRequests RentalRequest[] @relation("TenantRentalRequests")
 
   // Landlord → Rental Requests
-//   landlordRequests RentalRequest[] @relation("LandlordRentalRequests")
+  landlordRequests RentalRequest[] @relation("LandlordRentalRequests")
 
   // Tenant → Reviews
-//   reviews Review[]
+  reviews Review[]
 
   @@map("users")
 }

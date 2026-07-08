@@ -1,11 +1,14 @@
 import { Router } from "express";
 import { categoryController } from "./category.controller";
+import { auth } from "../../middlewares/auth";
+import { Role } from "../../../generated/prisma/enums";
 
 const router = Router();
 
-router.post("/", categoryController.createCategory);
+router.post("/", auth(Role.ADMIN), categoryController.createCategory);
 router.get("/", categoryController.getAllCategories);
-router.patch("/:id", categoryController.updateCategories);
-router.delete("/:id", categoryController.deleteCategories);
+router.get("/:id", categoryController.getSingleCategory);
+router.patch("/:id", auth(Role.ADMIN), categoryController.updateCategory);
+router.delete("/:id", auth(Role.ADMIN), categoryController.deleteCategory);
 
 export const categoryRoute = router;

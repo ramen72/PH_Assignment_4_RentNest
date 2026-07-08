@@ -8,8 +8,8 @@ import { Role } from "../generated/prisma/enums";
 import { adminRoute } from "./modules/admin/admin.route";
 import { amenityRoute } from "./modules/amenity/amenity.route";
 import { categoryRoute } from "./modules/category/category.route";
-import { propertyRoute } from "./modules/property/property.route";
 import { rentalRoute } from "./modules/rentalRequest/rentalRequest.route";
+import { propertyRoutes } from "./modules/property/property.route";
 const app: Application = express();
 
 app.use(express.json());
@@ -24,7 +24,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/admin", auth(Role.ADMIN), adminRoute);
 app.use("/api/amenities", amenityRoute);
 app.use("/api/categories", categoryRoute);
-app.use("/api/properties", propertyRoute);
+app.use("/api/properties", propertyRoutes);
 app.use("/api/rentals", rentalRoute);
 app.use("/api/reviews", rentalRoute);
 

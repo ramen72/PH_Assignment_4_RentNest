@@ -1,11 +1,30 @@
-import { Router } from "express";
+import express from "express";
+import { Role } from "../../../generated/prisma/enums";
 import { propertyController } from "./property.controller";
+import { auth } from "../../middlewares/auth";
+const router = express.Router();
 
-const router = Router();
-
-router.post("/", propertyController.createProperty);
+// Public
 router.get("/", propertyController.getAllProperties);
-router.patch("/:id", propertyController.updateProperties);
-router.delete("/:id", propertyController.deleteProperties);
+router.get("/:id", propertyController.getSingleProperty);
 
-export const propertyRoute = router;
+// Landlord
+router.post(
+  "/",
+  auth(Role.ADMIN, Role.LANDLORD),
+  propertyController.createProperty,
+);
+
+router.patch(
+  "/:id",
+  auth(Role.ADMIN, Role.LANDLORD),
+  propertyController.updateProperty,
+);
+
+router.delete(
+  "/:id",
+  auth(Role.ADMIN, Role.LANDLORD),
+  propertyController.deleteProperty,
+);
+
+export const propertyRoutes = router;

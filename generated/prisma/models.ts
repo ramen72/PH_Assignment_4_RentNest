@@ -8,5 +8,13 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Amenity'
+export type * from './models/Category'
+export type * from './models/Payment'
+export type * from './models/Property'
+export type * from './models/PropertyAmenity'
+export type * from './models/PropertyImage'
+export type * from './models/RentalRequest'
+export type * from './models/Review'
 export type * from './models/User'
 export type * from './commonInputTypes'
