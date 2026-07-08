@@ -11,6 +11,7 @@ import { categoryRoute } from "./modules/category/category.route";
 import { rentalRoute } from "./modules/rentalRequest/rentalRequest.route";
 import { propertyRoutes } from "./modules/property/property.route";
 import { propertyAmenityRoutes } from "./modules/propertyAmenity/propertyAmenity.route";
+import { propertyImageRoutes } from "./modules/propertyImage/propertyImage.route";
 const app: Application = express();
 
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use("/api/amenities", amenityRoute);
 app.use("/api/categories", categoryRoute);
 app.use("/api/properties", propertyRoutes);
 app.use("/api/propertyAmenities", propertyAmenityRoutes);
+app.use("/api/propertyImages", propertyImageRoutes);
 app.use("/api/rentals", rentalRoute);
 app.use("/api/reviews", rentalRoute);
 
