@@ -28,8 +28,121 @@ const createPropertyIntoDB = async (
   return result;
 };
 
-const getAllPropertiesFromDB = async () => {
+// const getAllPropertiesFromDB = async () => {
+//   const result = await prisma.property.findMany({
+//     include: {
+//       landlord: {
+//         omit: {
+//           password: true,
+//         },
+//       },
+//       category: true,
+//       amenities: true,
+//       images: true,
+//     },
+//     orderBy: [{ createdAt: "desc" }, { title: "asc" }],
+//   });
+//   return result;
+// };
+
+const getAllPropertiesFromDB = async (query: any) => {
+  const { searchTerm, city, area, minPrice, maxPrice, categoryId, amenities } =
+    query;
+  const where: any = {
+    isAvailable: true,
+  };
+
+  // Search by city, area, address, title
+  if (searchTerm) {
+    where.OR = [
+      {
+        title: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+      {
+        description: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+      {
+        address: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+      {
+        city: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+      {
+        area: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+      {
+        address: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+    ];
+  }
+
+  // Filter by city
+  if (city) {
+    where.city = {
+      contains: city,
+      mode: "insensitive",
+    };
+  }
+
+  // Filter by area
+  if (area) {
+    where.area = {
+      contains: area,
+      mode: "insensitive",
+    };
+  }
+
+  // Filter by price
+  if (minPrice || maxPrice) {
+    where.rentPrice = {};
+
+    if (minPrice) {
+      where.rentPrice.gte = Number(minPrice);
+    }
+
+    if (maxPrice) {
+      where.rentPrice.lte = Number(maxPrice);
+    }
+  }
+
+  // Filter by property type (Category)
+  if (categoryId) {
+    where.categoryId = categoryId;
+  }
+
+  // Filter by amenities
+  if (amenities) {
+    const amenityIds = JSON.parse(amenities);
+
+    where.amenities = {
+      some: {
+        amenityId: {
+          in: amenityIds,
+        },
+      },
+    };
+  }
+
   const result = await prisma.property.findMany({
+    where,
     include: {
       landlord: {
         omit: {
@@ -37,11 +150,23 @@ const getAllPropertiesFromDB = async () => {
         },
       },
       category: true,
-      amenities: true,
+      amenities: {
+        include: {
+          amenity: true,
+        },
+      },
       images: true,
     },
-    orderBy: [{ createdAt: "desc" }, { title: "asc" }],
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+      {
+        title: "asc",
+      },
+    ],
   });
+
   return result;
 };
 
