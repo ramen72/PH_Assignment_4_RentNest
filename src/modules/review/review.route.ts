@@ -10,4 +10,4 @@ router.get("/", auth(Role.ADMIN, Role.TENANT), reviewController.getAllReviews);
 router.get("/:id", reviewController.getReviewByPropertyId);
 router.patch("/:id", auth(Role.TENANT), reviewController.updateReview);
 router.delete("/:id", auth(Role.TENANT), reviewController.deleteReview);
-export const ReviewRoutes = router;
+export const reviewRoutes = router;

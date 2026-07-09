@@ -226,6 +226,7 @@ export type UserWhereInput = {
   rentalRequests?: Prisma.RentalRequestListRelationFilter
   landlordRequests?: Prisma.RentalRequestListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -243,6 +244,7 @@ export type UserOrderByWithRelationInput = {
   rentalRequests?: Prisma.RentalRequestOrderByRelationAggregateInput
   landlordRequests?: Prisma.RentalRequestOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +265,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   rentalRequests?: Prisma.RentalRequestListRelationFilter
   landlordRequests?: Prisma.RentalRequestListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -312,6 +315,7 @@ export type UserCreateInput = {
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
   landlordRequests?: Prisma.RentalRequestCreateNestedManyWithoutLandlordInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -329,6 +333,7 @@ export type UserUncheckedCreateInput = {
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
   landlordRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutLandlordInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -346,6 +351,7 @@ export type UserUpdateInput = {
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
   landlordRequests?: Prisma.RentalRequestUpdateManyWithoutLandlordNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -363,6 +369,7 @@ export type UserUncheckedUpdateInput = {
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
   landlordRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutLandlordNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -504,6 +511,20 @@ export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
 }
 
+export type UserCreateNestedOneWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
+  upsert?: Prisma.UserUpsertWithoutSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.UserUpdateWithoutSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+}
+
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
@@ -526,6 +547,7 @@ export type UserCreateWithoutPropertiesInput = {
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
   landlordRequests?: Prisma.RentalRequestCreateNestedManyWithoutLandlordInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPropertiesInput = {
@@ -542,6 +564,7 @@ export type UserUncheckedCreateWithoutPropertiesInput = {
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
   landlordRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutLandlordInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPropertiesInput = {
@@ -574,6 +597,7 @@ export type UserUpdateWithoutPropertiesInput = {
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
   landlordRequests?: Prisma.RentalRequestUpdateManyWithoutLandlordNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPropertiesInput = {
@@ -590,6 +614,7 @@ export type UserUncheckedUpdateWithoutPropertiesInput = {
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
   landlordRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutLandlordNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRentalRequestsInput = {
@@ -606,6 +631,7 @@ export type UserCreateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
   landlordRequests?: Prisma.RentalRequestCreateNestedManyWithoutLandlordInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRentalRequestsInput = {
@@ -622,6 +648,7 @@ export type UserUncheckedCreateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
   landlordRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutLandlordInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRentalRequestsInput = {
@@ -643,6 +670,7 @@ export type UserCreateWithoutLandlordRequestsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLandlordRequestsInput = {
@@ -659,6 +687,7 @@ export type UserUncheckedCreateWithoutLandlordRequestsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLandlordRequestsInput = {
@@ -691,6 +720,7 @@ export type UserUpdateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
   landlordRequests?: Prisma.RentalRequestUpdateManyWithoutLandlordNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRentalRequestsInput = {
@@ -707,6 +737,7 @@ export type UserUncheckedUpdateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
   landlordRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutLandlordNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutLandlordRequestsInput = {
@@ -734,6 +765,7 @@ export type UserUpdateWithoutLandlordRequestsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLandlordRequestsInput = {
@@ -750,6 +782,7 @@ export type UserUncheckedUpdateWithoutLandlordRequestsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -766,6 +799,7 @@ export type UserCreateWithoutReviewsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
   landlordRequests?: Prisma.RentalRequestCreateNestedManyWithoutLandlordInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -782,6 +816,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
   landlordRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutLandlordInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -814,6 +849,7 @@ export type UserUpdateWithoutReviewsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
   landlordRequests?: Prisma.RentalRequestUpdateManyWithoutLandlordNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -830,6 +866,91 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
   landlordRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutLandlordNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSubscriptionInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  phone?: string | null
+  profilePhoto?: string | null
+  role?: $Enums.Role
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  landlordRequests?: Prisma.RentalRequestCreateNestedManyWithoutLandlordInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+}
+
+export type UserUncheckedCreateWithoutSubscriptionInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  phone?: string | null
+  profilePhoto?: string | null
+  role?: $Enums.Role
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  landlordRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutLandlordInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type UserCreateOrConnectWithoutSubscriptionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type UserUpsertWithoutSubscriptionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type UserUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  landlordRequests?: Prisma.RentalRequestUpdateManyWithoutLandlordNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  landlordRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutLandlordNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 
@@ -905,6 +1026,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   rentalRequests?: boolean | Prisma.User$rentalRequestsArgs<ExtArgs>
   landlordRequests?: boolean | Prisma.User$landlordRequestsArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -953,6 +1075,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   rentalRequests?: boolean | Prisma.User$rentalRequestsArgs<ExtArgs>
   landlordRequests?: boolean | Prisma.User$landlordRequestsArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -965,6 +1088,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     rentalRequests: Prisma.$RentalRequestPayload<ExtArgs>[]
     landlordRequests: Prisma.$RentalRequestPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1375,6 +1499,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   rentalRequests<T extends Prisma.User$rentalRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rentalRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   landlordRequests<T extends Prisma.User$landlordRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$landlordRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1900,6 +2025,25 @@ export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
+}
+
+/**
+ * User.subscription
+ */
+export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
 }
 
 /**

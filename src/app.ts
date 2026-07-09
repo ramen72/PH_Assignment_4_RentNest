@@ -12,8 +12,12 @@ import { rentalRequestRoutes } from "./modules/rentalRequest/rentalRequest.route
 import { propertyRoutes } from "./modules/property/property.route";
 import { propertyAmenityRoutes } from "./modules/propertyAmenity/propertyAmenity.route";
 import { propertyImageRoutes } from "./modules/propertyImage/propertyImage.route";
-import { ReviewRoutes } from "./modules/review/review.route";
+import { reviewRoutes } from "./modules/review/review.route";
+import { subscriptionRoutes } from "./modules/subscription/subscription.route";
+
 const app: Application = express();
+
+app.use("/api/subscription/webhook", express.raw({ type: "application/json" }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,7 +35,8 @@ app.use("/api/properties", propertyRoutes);
 app.use("/api/propertyAmenities", propertyAmenityRoutes);
 app.use("/api/propertyImages", propertyImageRoutes);
 app.use("/api/rentalsRequest", rentalRequestRoutes);
-app.use("/api/reviews", ReviewRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/subscription", subscriptionRoutes);
 
 // Not Found Handler
 app.use(notFoundHandler);

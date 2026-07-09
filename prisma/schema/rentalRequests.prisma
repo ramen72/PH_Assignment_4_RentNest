@@ -21,7 +21,6 @@ model RentalRequest {
   landlord         User                 @relation("LandlordRentalRequests", fields: [landlordId], references: [id], onDelete: Cascade)
   property         Property             @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
-  payment          Payment?
 
   @@map("rental_requests")
 }

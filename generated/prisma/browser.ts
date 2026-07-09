@@ -28,11 +28,6 @@ export type Amenity = Prisma.AmenityModel
  */
 export type Category = Prisma.CategoryModel
 /**
- * Model Payment
- * 
- */
-export type Payment = Prisma.PaymentModel
-/**
  * Model Property
  * 
  */
@@ -57,6 +52,11 @@ export type RentalRequest = Prisma.RentalRequestModel
  * 
  */
 export type Review = Prisma.ReviewModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
 /**
  * Model User
  * 

@@ -37,18 +37,11 @@ export const RentalRequestStatus = {
 export type RentalRequestStatus = (typeof RentalRequestStatus)[keyof typeof RentalRequestStatus]
 
 
-export const PaymentProvider = {
-  STRIPE: 'STRIPE',
-  SSLCOMMERZ: 'SSLCOMMERZ'
+export const SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  EXPIRED: 'EXPIRED',
+  CANCELED: 'CANCELED'
 } as const
 
-export type PaymentProvider = (typeof PaymentProvider)[keyof typeof PaymentProvider]
-
-
-export const PaymentStatus = {
-  PENDING: 'PENDING',
-  SUCCESS: 'SUCCESS',
-  FAILED: 'FAILED'
-} as const
-
-export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]

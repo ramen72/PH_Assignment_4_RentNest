@@ -53,12 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Amenity: 'Amenity',
   Category: 'Category',
-  Payment: 'Payment',
   Property: 'Property',
   PropertyAmenity: 'PropertyAmenity',
   PropertyImage: 'PropertyImage',
   RentalRequest: 'RentalRequest',
   Review: 'Review',
+  Subscription: 'Subscription',
   User: 'User'
 } as const
 
@@ -95,22 +95,6 @@ export const CategoryScalarFieldEnum = {
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
-
-
-export const PaymentScalarFieldEnum = {
-  id: 'id',
-  rentalRequestId: 'rentalRequestId',
-  transactionId: 'transactionId',
-  amount: 'amount',
-  provider: 'provider',
-  paymentMethod: 'paymentMethod',
-  status: 'status',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const PropertyScalarFieldEnum = {
@@ -179,6 +163,20 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  currentPeriodEnd: 'currentPeriodEnd',
+  status: 'status',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

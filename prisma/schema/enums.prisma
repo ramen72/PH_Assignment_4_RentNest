@@ -16,3 +16,10 @@ enum RentalRequestStatus {
   ACTIVE
   COMPLETED
 }
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  EXPIRED
+  CANCELED
+}

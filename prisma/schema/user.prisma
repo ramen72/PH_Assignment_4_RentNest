@@ -25,6 +25,8 @@ model User {
 
   // Tenant → Reviews
   reviews Review[]
+  
+  subscription Subscription?
 
   @@map("users")
 }
