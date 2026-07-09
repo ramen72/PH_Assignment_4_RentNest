@@ -38,6 +38,7 @@ const getAllPropertiesFromDB = async () => {
       },
       category: true,
       amenities: true,
+      images: true,
     },
     orderBy: [{ createdAt: "desc" }, { title: "asc" }],
   });
@@ -58,23 +59,57 @@ const updatePropertyIntoDB = async (
   id: string,
   payload: IUpdatePropertyPayload,
 ) => {
-  const { categoryId, ...propertyData } = payload;
+  const { categoryId, images, amenities, ...propertyData } = payload;
 
-  // const data = {
-  //   ...propertyData,
-  //   ...(categoryId && {
-  //     category: {
-  //       connect: {
-  //         id: categoryId,
-  //       },
-  //     },
-  //   }),
-  // };
+  // Property exists?
+  await prisma.property.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
 
-  // return prisma.property.update({
-  //   where: { id },
-  //   data,
-  // });
+  const result = await prisma.property.update({
+    where: {
+      id,
+    },
+    data: {
+      ...propertyData,
+
+      ...(categoryId && {
+        category: {
+          connect: {
+            id: categoryId,
+          },
+        },
+      }),
+    },
+    include: {
+      category: true,
+      landlord: {
+        // omit: {
+        //   password: true,
+        // },
+        select: {
+          // id: true,
+          name: true,
+          email: true,
+          phone: true,
+          profilePhoto: true,
+          status: true,
+        },
+      },
+
+      images: true,
+
+      amenities: {
+        include: {
+          amenity: true,
+        },
+      },
+    },
+  });
+
+  return result;
 };
 
 const deletePropertyFromDB = async (id: string) => {
