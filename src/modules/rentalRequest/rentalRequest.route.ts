@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
   "/",
-  auth(Role.ADMIN, Role.LANDLORD),
+  auth(Role.TENANT),
   rentalRequestController.createRentalRequest,
 );
 
@@ -25,13 +25,13 @@ router.get(
 
 router.patch(
   "/:id",
-  auth(Role.ADMIN, Role.LANDLORD),
+  auth(Role.TENANT),
   rentalRequestController.updateRentalRequest,
 );
 
 router.patch(
-  "/:id/status",
-  auth(Role.ADMIN, Role.LANDLORD),
+  "/status/:id",
+  auth(Role.LANDLORD),
   rentalRequestController.updateRentalRequestStatus,
 );
 

@@ -1,4 +1,4 @@
-import { RentalRequestStatus } from "../../../generated/prisma/enums";
+import { RentalRequestStatus, Role } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import {
   ICreateRentalRequestPayload,
@@ -9,23 +9,39 @@ const createRentalRequestIntoDB = async (
   payload: ICreateRentalRequestPayload,
   tenantId: string,
 ) => {
-  const property = await prisma.property.findUniqueOrThrow({
+  const propertyId = payload.propertyId;
+
+  const property = await prisma.property.findFirst({
     where: {
-      id: payload.propertyId,
+      id: propertyId,
     },
     select: {
       landlordId: true,
+      rentPrice: true,
     },
   });
-
+  if (!property) {
+    throw new Error("Sorry!. Property is not available.");
+  }
+  const isRequestExist = await prisma.rentalRequest.findFirst({
+    where: {
+      propertyId,
+      tenantId,
+    },
+  });
+  if (isRequestExist) {
+    throw new Error(
+      `Already make rental request at ${isRequestExist.createdAt}`,
+    );
+  }
   const result = await prisma.rentalRequest.create({
     data: {
       tenantId,
-      landlordId: property.landlordId,
       propertyId: payload.propertyId,
       moveInDate: payload.moveInDate,
       rentalDuration: payload.rentalDuration,
-      monthlyRent: payload.monthlyRent,
+      landlordId: property.landlordId,
+      monthlyRent: property.rentPrice,
       message: payload.message,
     },
     include: {
@@ -38,11 +54,46 @@ const createRentalRequestIntoDB = async (
   return result;
 };
 
-const getAllRentalRequestsFromDB = async () => {
-  return prisma.rentalRequest.findMany({
+const getAllRentalRequestsFromDB = async (
+  requesterId: string,
+  requesterRole: Role,
+) => {
+  const whereFilter =
+    requesterRole === "ADMIN"
+      ? {} // Admins get no filters (see everything)
+      : {
+          OR: [{ tenantId: requesterId }, { landlordId: requesterId }],
+        };
+
+  const result = await prisma.rentalRequest.findMany({
+    where: whereFilter,
     include: {
-      tenant: true,
-      landlord: true,
+      tenant: {
+        // omit: {
+        //   password: true,
+        // },
+        select: {
+          // id: true,
+          name: true,
+          email: true,
+          phone: true,
+          profilePhoto: true,
+          status: true,
+        },
+      },
+      landlord: {
+        // omit: {
+        //   password: true,
+        // },
+        select: {
+          // id: true,
+          name: true,
+          email: true,
+          phone: true,
+          profilePhoto: true,
+          status: true,
+        },
+      },
       property: true,
       payment: true,
     },
@@ -50,16 +101,54 @@ const getAllRentalRequestsFromDB = async () => {
       createdAt: "desc",
     },
   });
+
+  return result;
 };
 
-const getSingleRentalRequestFromDB = async (id: string) => {
+const getSingleRentalRequestFromDB = async (
+  id: string,
+  requesterId: string,
+  requesterRole: Role,
+) => {
+  const whereFilter =
+    requesterRole === "ADMIN"
+      ? { id }
+      : {
+          id,
+          OR: [{ tenantId: requesterId }, { landlordId: requesterId }],
+        };
+
+  console.log(whereFilter);
+
   return prisma.rentalRequest.findUniqueOrThrow({
-    where: {
-      id,
-    },
+    where: whereFilter,
     include: {
-      tenant: true,
-      landlord: true,
+      tenant: {
+        // omit: {
+        //   password: true,
+        // },
+        select: {
+          // id: true,
+          name: true,
+          email: true,
+          phone: true,
+          profilePhoto: true,
+          status: true,
+        },
+      },
+      landlord: {
+        // omit: {
+        //   password: true,
+        // },
+        select: {
+          // id: true,
+          name: true,
+          email: true,
+          phone: true,
+          profilePhoto: true,
+          status: true,
+        },
+      },
       property: true,
       payment: true,
     },
@@ -82,7 +171,7 @@ const updateRentalRequestStatusIntoDB = async (
   id: string,
   status: RentalRequestStatus,
 ) => {
-  return prisma.rentalRequest.update({
+  const result = await prisma.rentalRequest.update({
     where: {
       id,
     },
@@ -90,6 +179,7 @@ const updateRentalRequestStatusIntoDB = async (
       status,
     },
   });
+  return result;
 };
 
 const deleteRentalRequestFromDB = async (id: string) => {
