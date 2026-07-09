@@ -12,6 +12,7 @@ import { rentalRequestRoutes } from "./modules/rentalRequest/rentalRequest.route
 import { propertyRoutes } from "./modules/property/property.route";
 import { propertyAmenityRoutes } from "./modules/propertyAmenity/propertyAmenity.route";
 import { propertyImageRoutes } from "./modules/propertyImage/propertyImage.route";
+import { ReviewRoutes } from "./modules/review/review.route";
 const app: Application = express();
 
 app.use(express.json());
@@ -30,7 +31,7 @@ app.use("/api/properties", propertyRoutes);
 app.use("/api/propertyAmenities", propertyAmenityRoutes);
 app.use("/api/propertyImages", propertyImageRoutes);
 app.use("/api/rentalsRequest", rentalRequestRoutes);
-// app.use("/api/reviews", rentalRoute);
+app.use("/api/reviews", ReviewRoutes);
 
 // Not Found Handler
 app.use(notFoundHandler);

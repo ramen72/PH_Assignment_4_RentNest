@@ -1,12 +1,13 @@
-import { Router } from "express";
+import express, { Router } from "express";
+import { auth } from "../../middlewares/auth";
+import { Role } from "../../../generated/prisma/enums";
 import { reviewController } from "./review.controller";
 
 const router = Router();
 
-router.post("/", reviewController.createReview);
-router.get("/", reviewController.getAllReviews);
-router.get("/:propertyId", reviewController.getAllReviews);
-router.patch("/:id", reviewController.updateReviews);
-router.delete("/:id", reviewController.deleteReviews);
-
-export const reviewRoute = router;
+router.post("/", auth(Role.TENANT), reviewController.createReview);
+router.get("/", auth(Role.ADMIN, Role.TENANT), reviewController.getAllReviews);
+router.get("/:id", reviewController.getReviewByPropertyId);
+router.patch("/:id", auth(Role.TENANT), reviewController.updateReview);
+router.delete("/:id", auth(Role.TENANT), reviewController.deleteReview);
+export const ReviewRoutes = router;
