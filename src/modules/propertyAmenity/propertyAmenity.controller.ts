@@ -36,8 +36,10 @@ const getPropertyAmenities = catchAsync(async (req: Request, res: Response) => {
 
 const deletePropertyAmenities = catchAsync(
   async (req: Request, res: Response) => {
+    const { propertyId, amenityId } = req.query;
     const result = await propertyAmenityService.deletePropertyAmenityFromDB(
-      req.body,
+      propertyId as string,
+      amenityId as string,
     );
 
     sendResponse(res, {

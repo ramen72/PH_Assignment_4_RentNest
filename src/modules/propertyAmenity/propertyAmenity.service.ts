@@ -30,13 +30,14 @@ const getPropertyAmenitiesFromDB = async (propertyId: string) => {
 };
 
 const deletePropertyAmenityFromDB = async (
-  payload: IDeletePropertyAmenityPayload,
+  propertyId: string,
+  amenityId: string,
 ) => {
   return prisma.propertyAmenity.delete({
     where: {
       propertyId_amenityId: {
-        propertyId: payload.propertyId,
-        amenityId: payload.amenityId,
+        propertyId: propertyId,
+        amenityId: amenityId,
       },
     },
   });

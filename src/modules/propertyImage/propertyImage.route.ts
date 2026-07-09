@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/", propertyImageController.getAllPropertyImages);
 router.get("/:id", propertyImageController.getSinglePropertyImage);
 router.get(
-  "/propertyImages/:id",
+  "/propertyAllImages/:id",
   propertyImageController.getAllImageForSingleProperty,
 );
 
