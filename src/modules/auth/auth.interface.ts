@@ -10,6 +10,16 @@ export interface IRegisterUserPayload {
   status: UserStatus;
 }
 
+export interface IUpdateUserPayload {
+  name?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+  profilePhoto?: string;
+  role?: Role;
+  status?: UserStatus;
+}
+
 export interface ILoginPayload {
   email: string;
   password: string;

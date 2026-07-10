@@ -4,10 +4,17 @@ import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
 import { authService } from "./auth.service";
 import { IRegisterUserPayload } from "./auth.interface";
+import { Role } from "../../../generated/prisma/enums";
 
 const registerUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
+    if (payload.role === Role.ADMIN) {
+      throw new Error(
+        `Sorry!. You don't have permission to create ADMIN user! You can register only as ${Role.LANDLORD} or ${Role.TENANT}. `,
+      );
+    }
+
     const user = await authService.registerUserIntoDB(
       payload as IRegisterUserPayload,
     );
