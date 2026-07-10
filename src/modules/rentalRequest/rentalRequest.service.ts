@@ -95,7 +95,6 @@ const getAllRentalRequestsFromDB = async (
         },
       },
       property: true,
-      payment: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -117,8 +116,6 @@ const getSingleRentalRequestFromDB = async (
           id,
           OR: [{ tenantId: requesterId }, { landlordId: requesterId }],
         };
-
-  console.log(whereFilter);
 
   return prisma.rentalRequest.findUniqueOrThrow({
     where: whereFilter,
@@ -150,7 +147,6 @@ const getSingleRentalRequestFromDB = async (
         },
       },
       property: true,
-      payment: true,
     },
   });
 };
