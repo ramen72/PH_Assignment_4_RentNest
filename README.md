@@ -7,7 +7,7 @@ Rental Project.
 > Find & List Rental Properties with Ease
 
 <p align="center">
-  <img src="./assets/logo.png" width="150" alt="RentNest Logo"/>
+  Used Technology
 </p>
 
 <p align="center">
@@ -48,7 +48,7 @@ Rental Project.
 
 ---
 
-# 📌 Project Overview
+# Project Overview
 
 Project introduction...
 
@@ -56,13 +56,12 @@ Project introduction...
 
 # 🌐 Live Links
 
-- Frontend
-- Backend
-- API Documentation
+- <a href="https://example.com" target="_blank">Backend</a>
+- <a href="https://example.com" target="_blank">API Documentation</a>
 
 ---
 
-# ✨ Features
+# Features
 
 ## Public Features
 
@@ -95,7 +94,7 @@ Project introduction...
 
 ---
 
-# 🛠 Technology Stack
+# Technology Stack
 
 ## Backend
 
@@ -116,11 +115,9 @@ Project introduction...
 ## Payment
 
 - Stripe
-- SSLCommerz
 
 ## Others
 
-- Zod
 - Cookie Parser
 - CORS
 - dotenv
@@ -128,10 +125,6 @@ Project introduction...
 ---
 
 # 🏗 System Architecture
-
-Frontend
-
-↓
 
 Backend API
 
@@ -158,56 +151,34 @@ Stripe
 
 ---
 
-## Property
-
-...
-
----
-
-## Rental Request
-
-...
-
----
-
-## Payment
-
-...
-
----
-
-## Review
-
-...
-
----
-
 # 📂 Project Structure
 
 ```text
-src
-│
-├── app
-│   ├── modules
-│   │   ├── auth
-│   │   ├── user
-│   │   ├── property
-│   │   ├── category
-│   │   ├── amenity
-│   │   ├── rentalRequest
-│   │   ├── payment
-│   │   ├── review
-│   │   └── subscription
-│   │
-│   ├── middlewares
-│   ├── routes
-│   ├── config
-│   ├── helpers
-│   └── utils
+PH_Assignment_4_RentNest
 │
 ├── prisma
+├── src
+│   ├── config
+│   ├── lib
+│   ├── middlewares
+│   ├── modules
+│   │   ├── admin
+│   │   ├── amenity
+│   │   ├── auth
+│   │   ├── category
+│   │   ├── property
+│   │   ├── propertyAmenity
+│   │   ├── propertyImages payment
+│   │   ├── rentalRequest
+│   │   ├── review
+│   │   └── subscription
+│   │── utils
+│   ├── app.ts
+│   └── server.ts
 │
-├── uploads
-│
-└── server.ts
+├── .env
+├── Package-lock.json
+├── Packagejson
+├── README.md
+└── prisma.config.ts
 ```
