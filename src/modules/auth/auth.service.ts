@@ -1,6 +1,10 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "../../lib/prisma";
-import { ILoginPayload, IRegisterUserPayload } from "./auth.interface";
+import {
+  ILoginPayload,
+  IRegisterUserPayload,
+  IUpdateUserPayload,
+} from "./auth.interface";
 import config from "../../config";
 import httpStatus from "http-status";
 import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
@@ -90,6 +94,41 @@ const loginUserIntoDB = async (payload: ILoginPayload) => {
   };
 };
 
+const updateProfileIntoDB = async (
+  userId: string,
+  payload: IUpdateUserPayload,
+) => {
+  await prisma.user.findUniqueOrThrow({
+    where: {
+      id: userId,
+    },
+  });
+
+  const result = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      name: payload.name,
+      phone: payload.phone,
+      profilePhoto: payload.profilePhoto,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      profilePhoto: true,
+      role: true,
+      status: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return result;
+};
+
 const refreshToken = async (refreshToken: string) => {
   // Refresh Access Token
   const verifiedRefreshToken = await jwtUtils.verifiedToken(
@@ -130,5 +169,6 @@ const refreshToken = async (refreshToken: string) => {
 export const authService = {
   registerUserIntoDB,
   loginUserIntoDB,
+  updateProfileIntoDB,
   refreshToken,
 };

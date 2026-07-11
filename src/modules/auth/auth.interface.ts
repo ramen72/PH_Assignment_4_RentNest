@@ -13,10 +13,8 @@ export interface IRegisterUserPayload {
 export interface IUpdateUserPayload {
   name?: string;
   email?: string;
-  password?: string;
   phone?: string;
   profilePhoto?: string;
-  role?: Role;
   status?: UserStatus;
 }
 
