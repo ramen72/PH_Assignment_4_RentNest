@@ -22,6 +22,28 @@ Rental Project.
 
 ---
 
+Backend Repo : https://github.com/your-username/rentnest-backend
+Live API : https://rentnest-api.vercel.app
+API Docs : https://documenter.getpostman.com/view/xxx
+Demo Video : https://drive.google.com/file/d/xxx/view
+Admin Email : admin@rentnest.com
+Admin Password : admin123
+
+---
+
+# 🌐 Live Links
+
+- <a href="https://github.com/ramen72/PH_Assignment_4_RentNest.git" target="_blank">Backend Repo</a>
+- <a href="https://example.com" target="_blank">Live API</a>
+- <a href="https://example.com" target="_blank">API Documentation</a>
+- <a href="https://drive.google.com/file/d/1NDe7ecuSa7If1bdMnRp00vvgW88Pe8mw/view?usp=sharing" target="_blank">Demo Video</a>
+
+### Admin Email : ADMIN@gmail.com
+
+### Admin Password : 12345678
+
+---
+
 # 📖 Table of Contents
 
 - Project Overview
@@ -51,13 +73,6 @@ Rental Project.
 # Project Overview
 
 Project introduction...
-
----
-
-# 🌐 Live Links
-
-- <a href="https://example.com" target="_blank">Backend</a>
-- <a href="https://example.com" target="_blank">API Documentation</a>
 
 ---
 
@@ -124,7 +139,7 @@ Project introduction...
 
 ---
 
-# 🏗 System Architecture
+# System Architecture
 
 Backend API
 
@@ -138,7 +153,7 @@ Stripe
 
 ---
 
-# 🗄 Database Schema
+# Database Schema
 
 ## User
 
