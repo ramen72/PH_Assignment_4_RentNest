@@ -1,13 +1,11 @@
 import Stripe from "stripe";
 import config from "../../config";
 import { prisma } from "../../lib/prisma";
-// import { stripe } from "../../lib/stripe";
-import { SubscriptionStatus } from "../../../generated/prisma/enums";
-import { stripe } from "../../lib/stripe";
 import {
   handleChangeSubscription,
   handleCheckoutCompleted,
 } from "../../utils/subscription.utils";
+import { IGetPaymentHistoryQuery } from "./subscription.interface";
 
 const createCheckoutSession = async (userId: string) => {
   const transactionResult = await prisma.$transaction(async (tx) => {
@@ -20,40 +18,59 @@ const createCheckoutSession = async (userId: string) => {
       },
     });
 
-    // Old subscriber
+    // Check whether the user already has a Stripe customer
     let stripeCustomerId = user.subscription?.stripeCustomerId;
 
+    // Create a new Stripe customer if one doesn't exist
     if (!stripeCustomerId) {
-      // new subscriber
       const customer = await stripe.customers.create({
         email: user.email,
         name: user.name,
-        metadata: { userId: user.id },
+        metadata: {
+          userId: user.id,
+        },
       });
 
       stripeCustomerId = customer.id;
+
+      // Save Stripe customer ID in the User table
+      await tx.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          stripeCustomerId,
+        },
+      });
     }
 
+    console.log("Stripe Customer ID:", stripeCustomerId);
+
+    // Create Checkout Session
     const session = await stripe.checkout.sessions.create({
+      customer: stripeCustomerId,
+      mode: "subscription",
+      payment_method_types: ["card"],
       line_items: [
         {
           price: config.stripe_product_price_id,
           quantity: 1,
         },
       ],
-      mode: "subscription",
-      customer: stripeCustomerId,
-      payment_method_types: ["card"],
       success_url: `${config.app_url}/payment?success=true`,
       cancel_url: `${config.app_url}/payment?success=false`,
-      metadata: { userId: user.id },
+      metadata: {
+        userId: user.id,
+      },
     });
 
-    return session.url;
+    return {
+      paymentUrl: session.url,
+      sessionId: session.id,
+    };
   });
-  return {
-    paymentUrl: transactionResult,
-  };
+
+  return transactionResult;
 };
 
 const handleWebhook = async (payload: Buffer, signature: string) => {
@@ -106,8 +123,67 @@ const getSubscriptionStatus = async (userId: string) => {
     currentPeriodEnd: isSubscriptionExist.currentPeriodEnd,
   };
 };
+
+const getSubscriptionDetailsFromDB = async () => {
+  const allSubscriptionDetails = await prisma.subscription.findMany();
+  return allSubscriptionDetails;
+};
+
+const stripe = new Stripe(config.stripe_secret_key as string);
+
+const getPaymentHistoryFromStripe = async (
+  payload: IGetPaymentHistoryQuery,
+) => {
+  // console.log("Payload:", payload);
+
+  const paymentIntents = await stripe.paymentIntents.list({
+    customer: payload.customerId,
+    limit: payload.limit || 10,
+  });
+
+  // console.log(paymentIntents);
+  const result = await Promise.all(
+    paymentIntents.data.map(async (payment) => {
+      let invoice = null;
+      const invoiceReference = (
+        payment as Stripe.PaymentIntent & {
+          invoice?: string | Stripe.Invoice | null;
+        }
+      ).invoice;
+
+      if (typeof invoiceReference === "string") {
+        invoice = await stripe.invoices.retrieve(invoiceReference);
+      }
+
+      return {
+        paymentIntentId: payment.id,
+        invoiceId: invoice?.id ?? null,
+        customerId: payment.customer,
+        amount: payment.amount / 100,
+        currency: payment.currency,
+        status: payment.status,
+        description: payment.description,
+        receiptEmail: payment.receipt_email,
+        createdAt: new Date(payment.created * 1000),
+        invoicePdf: invoice?.invoice_pdf ?? null,
+        invoiceUrl: invoice?.hosted_invoice_url ?? null,
+        subscriptionId:
+          invoice &&
+          invoice.parent &&
+          typeof invoice.parent === "object" &&
+          "subscription_details" in invoice.parent
+            ? invoice.parent.subscription_details?.subscription
+            : null,
+      };
+    }),
+  );
+
+  return result;
+};
 export const subscriptionServices = {
   createCheckoutSession,
   handleWebhook,
   getSubscriptionStatus,
+  getSubscriptionDetailsFromDB,
+  getPaymentHistoryFromStripe,
 };

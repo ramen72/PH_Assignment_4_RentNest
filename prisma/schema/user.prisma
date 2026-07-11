@@ -8,6 +8,8 @@ model User {
   role         Role        @default(TENANT)
   status       UserStatus  @default(ACTIVE)
 
+  stripeCustomerId String?     @unique
+
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
 
