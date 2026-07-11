@@ -128,15 +128,34 @@ const getAllPropertiesFromDB = async (query: any) => {
     where.categoryId = categoryId;
   }
 
-  // Filter by amenities
+  // Filter by amenities (ID or Name)
   if (amenities) {
-    const amenityIds = JSON.parse(amenities);
+    let amenityValues: string[];
+
+    try {
+      const parsed = JSON.parse(amenities);
+      amenityValues = Array.isArray(parsed) ? parsed : [parsed];
+    } catch {
+      amenityValues = [amenities];
+    }
 
     where.amenities = {
       some: {
-        amenityId: {
-          in: amenityIds,
-        },
+        OR: [
+          {
+            amenityId: {
+              in: amenityValues,
+            },
+          },
+          {
+            amenity: {
+              name: {
+                in: amenityValues,
+                mode: "insensitive",
+              },
+            },
+          },
+        ],
       },
     };
   }
