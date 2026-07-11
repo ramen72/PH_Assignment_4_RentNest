@@ -22,15 +22,6 @@ Rental Project.
 
 ---
 
-Backend Repo : https://github.com/your-username/rentnest-backend
-Live API : https://rentnest-api.vercel.app
-API Docs : https://documenter.getpostman.com/view/xxx
-Demo Video : https://drive.google.com/file/d/xxx/view
-Admin Email : admin@rentnest.com
-Admin Password : admin123
-
----
-
 # 🌐 Live Links
 
 - <a href="https://github.com/ramen72/PH_Assignment_4_RentNest.git" target="_blank">Backend Repo</a>
