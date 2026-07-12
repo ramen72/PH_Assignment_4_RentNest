@@ -26,7 +26,8 @@ Rental Project.
 
 - <a href="https://github.com/ramen72/PH_Assignment_4_RentNest.git" target="_blank">Backend Repo</a>
 - <a href="https://example.com" target="_blank">Live API</a>
-- <a href="https://drive.google.com/file/d/1JKjlh2j_K58OopbtXOHdVSa2qTefYxXE/view?usp=sharing" target="_blank">API Documentation</a>
+<!-- - <a href="https://drive.google.com/file/d/1JKjlh2j_K58OopbtXOHdVSa2qTefYxXE/view?usp=sharing" target="_blank">API Documentation</a> -->
+- <a href="http://localhost:5000/api-docs/" target="_blank">API Documentation</a>
 - <a href="https://drive.google.com/file/d/1NDe7ecuSa7If1bdMnRp00vvgW88Pe8mw/view?usp=sharing" target="_blank">Demo Video</a>
 
 ### Admin Email : ADMIN@gmail.com
