@@ -33,6 +33,7 @@ export type UserMinAggregateOutputType = {
   profilePhoto: string | null
   role: $Enums.Role | null
   status: $Enums.UserStatus | null
+  stripeCustomerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +47,7 @@ export type UserMaxAggregateOutputType = {
   profilePhoto: string | null
   role: $Enums.Role | null
   status: $Enums.UserStatus | null
+  stripeCustomerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,6 +61,7 @@ export type UserCountAggregateOutputType = {
   profilePhoto: number
   role: number
   status: number
+  stripeCustomerId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +77,7 @@ export type UserMinAggregateInputType = {
   profilePhoto?: true
   role?: true
   status?: true
+  stripeCustomerId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -87,6 +91,7 @@ export type UserMaxAggregateInputType = {
   profilePhoto?: true
   role?: true
   status?: true
+  stripeCustomerId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +105,7 @@ export type UserCountAggregateInputType = {
   profilePhoto?: true
   role?: true
   status?: true
+  stripeCustomerId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -186,6 +192,7 @@ export type UserGroupByOutputType = {
   profilePhoto: string | null
   role: $Enums.Role
   status: $Enums.UserStatus
+  stripeCustomerId: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -220,6 +227,7 @@ export type UserWhereInput = {
   profilePhoto?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   properties?: Prisma.PropertyListRelationFilter
@@ -238,6 +246,7 @@ export type UserOrderByWithRelationInput = {
   profilePhoto?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   properties?: Prisma.PropertyOrderByRelationAggregateInput
@@ -250,6 +259,7 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  stripeCustomerId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -266,7 +276,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   landlordRequests?: Prisma.RentalRequestListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
-}, "id" | "email">
+}, "id" | "email" | "stripeCustomerId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -277,6 +287,7 @@ export type UserOrderByWithAggregationInput = {
   profilePhoto?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -296,6 +307,7 @@ export type UserScalarWhereWithAggregatesInput = {
   profilePhoto?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
+  stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -309,6 +321,7 @@ export type UserCreateInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
@@ -327,6 +340,7 @@ export type UserUncheckedCreateInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
@@ -345,6 +359,7 @@ export type UserUpdateInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
@@ -363,6 +378,7 @@ export type UserUncheckedUpdateInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
@@ -381,6 +397,7 @@ export type UserCreateManyInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -394,6 +411,7 @@ export type UserUpdateManyMutationInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -407,6 +425,7 @@ export type UserUncheckedUpdateManyInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -425,6 +444,7 @@ export type UserCountOrderByAggregateInput = {
   profilePhoto?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -438,6 +458,7 @@ export type UserMaxOrderByAggregateInput = {
   profilePhoto?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -451,6 +472,7 @@ export type UserMinOrderByAggregateInput = {
   profilePhoto?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -542,6 +564,7 @@ export type UserCreateWithoutPropertiesInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -559,6 +582,7 @@ export type UserUncheckedCreateWithoutPropertiesInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -592,6 +616,7 @@ export type UserUpdateWithoutPropertiesInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -609,6 +634,7 @@ export type UserUncheckedUpdateWithoutPropertiesInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -626,6 +652,7 @@ export type UserCreateWithoutRentalRequestsInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
@@ -643,6 +670,7 @@ export type UserUncheckedCreateWithoutRentalRequestsInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
@@ -665,6 +693,7 @@ export type UserCreateWithoutLandlordRequestsInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
@@ -682,6 +711,7 @@ export type UserUncheckedCreateWithoutLandlordRequestsInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
@@ -715,6 +745,7 @@ export type UserUpdateWithoutRentalRequestsInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
@@ -732,6 +763,7 @@ export type UserUncheckedUpdateWithoutRentalRequestsInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
@@ -760,6 +792,7 @@ export type UserUpdateWithoutLandlordRequestsInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
@@ -777,6 +810,7 @@ export type UserUncheckedUpdateWithoutLandlordRequestsInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
@@ -794,6 +828,7 @@ export type UserCreateWithoutReviewsInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
@@ -811,6 +846,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
@@ -844,6 +880,7 @@ export type UserUpdateWithoutReviewsInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
@@ -861,6 +898,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
@@ -878,6 +916,7 @@ export type UserCreateWithoutSubscriptionInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutLandlordInput
@@ -895,6 +934,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   profilePhoto?: string | null
   role?: $Enums.Role
   status?: $Enums.UserStatus
+  stripeCustomerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutLandlordInput
@@ -928,6 +968,7 @@ export type UserUpdateWithoutSubscriptionInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutLandlordNestedInput
@@ -945,6 +986,7 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   profilePhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutLandlordNestedInput
@@ -1020,6 +1062,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   profilePhoto?: boolean
   role?: boolean
   status?: boolean
+  stripeCustomerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   properties?: boolean | Prisma.User$propertiesArgs<ExtArgs>
@@ -1039,6 +1082,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   profilePhoto?: boolean
   role?: boolean
   status?: boolean
+  stripeCustomerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1052,6 +1096,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   profilePhoto?: boolean
   role?: boolean
   status?: boolean
+  stripeCustomerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1065,11 +1110,12 @@ export type UserSelectScalar = {
   profilePhoto?: boolean
   role?: boolean
   status?: boolean
+  stripeCustomerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "profilePhoto" | "role" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "profilePhoto" | "role" | "status" | "stripeCustomerId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   properties?: boolean | Prisma.User$propertiesArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.User$rentalRequestsArgs<ExtArgs>
@@ -1099,6 +1145,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     profilePhoto: string | null
     role: $Enums.Role
     status: $Enums.UserStatus
+    stripeCustomerId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1537,6 +1584,7 @@ export interface UserFieldRefs {
   readonly profilePhoto: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
+  readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

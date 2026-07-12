@@ -188,6 +188,7 @@ export const UserScalarFieldEnum = {
   profilePhoto: 'profilePhoto',
   role: 'role',
   status: 'status',
+  stripeCustomerId: 'stripeCustomerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
