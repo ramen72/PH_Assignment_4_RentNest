@@ -34,8 +34,8 @@ const options = {
     },
     servers: [
       {
-        // url: "http://localhost:5000",
-        url: "https://rentnest.devsramen.com/",
+        url: "http://localhost:5000",
+        // url: "https://rentnest.devsramen.com/",
       },
     ],
   },
